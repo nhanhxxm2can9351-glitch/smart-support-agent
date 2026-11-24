@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>智能客服 Agent · 项目介绍</title>
+<style>
+  :root{
+    --bg:#f6f8fc; --card:#ffffff; --ink:#16233a; --muted:#64748b;
+    --line:#e4e9f2; --brand:#3b5bdb; --brand-soft:#eef2ff; --accent:#0f9d8a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);background:rgba(255,255,255,.85);backdrop-filter:blur(8px);position:sticky;top:0;z-index:10}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+  .mark{width:30px;height:30px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:16px}
+  .nav a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:22px}
+  .nav a:hover{color:var(--brand)}
+  .hero{padding:76px 0 56px;text-align:center}
+  .eyebrow{display:inline-block;background:var(--brand-soft);color:var(--brand);border:1px solid #dbe3ff;padding:5px 14px;border-radius:99px;font-size:12px;font-weight:600;letter-spacing:.04em}
+  h1{font-size:clamp(32px,5.5vw,52px);line-height:1.2;margin:22px 0 16px;letter-spacing:-.02em}
+  h1 span{color:var(--brand)}
+  .lead{color:var(--muted);font-size:17px;max-width:620px;margin:0 auto 32px}
+  .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 8px 20px rgba(59,91,219,.22)}
+  .btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .hint{margin-top:18px;font-size:12.5px;color:var(--muted)}
+  .qr{margin-top:22px;display:inline-flex;flex-direction:column;align-items:center;gap:8px}
+  .qr img{width:118px;height:118px;border-radius:12px;border:1px solid var(--line);background:#fff;padding:6px}
+  .qr span{font-size:12px;color:var(--muted)}
+  code{background:#eef1f7;padding:2px 6px;border-radius:5px;font-size:.9em}
+  section{padding:44px 0}
+  h2{font-size:24px;margin-bottom:8px;letter-spacing:-.01em}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:26px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card .num{font-size:12px;font-weight:700;color:var(--brand);letter-spacing:.08em}
+  .card h3{font-size:16px;margin:10px 0 8px}
+  .card p{font-size:13.5px;color:var(--muted)}
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:8px}
+  .step{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);padding:18px 16px;position:relative}
+  .step:first-child{border-radius:12px 0 0 12px}
+  .step:last-child{border-radius:0 12px 12px 0}
+  .step b{display:block;font-size:13px;margin-bottom:6px}
+  .step small{color:var(--muted);font-size:12px;line-height:1.5}
+  .step::after{content:"›";position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--brand);font-size:22px;font-weight:700;z-index:2;background:var(--bg);line-height:1}
+  .step:last-child::after{display:none}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .tag{background:#fff;border:1px solid var(--line);border-radius:7px;padding:6px 12px;font-size:12.5px;color:var(--muted)}
+  .note{background:#fffaf0;border:1px solid #f3e2bd;border-left:3px solid #e0a83a;border-radius:10px;padding:18px 20px;font-size:13.5px;color:#6b5628}
+  .note b{color:#8a5f14}
+  .note a{color:var(--brand)}
+  footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  @media(max-width:640px){.step{border-radius:10px!important;min-width:100%}.step::after{content:"⌄";right:auto;left:50%;top:auto;bottom:-14px;transform:translateX(-50%)}.step:last-child::after{display:none}.hero{padding:52px 0 36px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="mark">✦</span> 智能客服 Agent</div>
+    <div>
+      <a href="#features">功能</a>
+      <a href="#flow">处理链路</a>
+      <a href="https://smart-support-agent-26228.app.workbuddy.host/?sharecode=WRNQK76XET">在线演示</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="hero">
+    <span class="eyebrow">OPEN SOURCE · CLOUD NATIVE</span>
+    <h1>会自己查知识库、<br><span>懂意图、能转人工</span>的客服 Agent</h1>
+    <p class="lead">多轮对话、FAQ 检索、大模型意图识别与流式回复、满意度统计与管理后台，全部数据持久化在云端。原生 HTML/CSS/JS，无构建步骤。</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="https://smart-support-agent-26228.app.workbuddy.host/?sharecode=WRNQK76XET">打开在线演示 &nbsp;→</a>
+      <a class="btn btn-ghost" href="#about">了解技术架构</a>
+    </div>
+    <p class="hint">演示链接需保留 <code>?sharecode=...</code> 参数；可直接转发给任何人，无需登录。</p>
+    <div class="qr">
+      <img src="qrcode.png" alt="在线演示二维码" width="118" height="118">
+      <span>扫码直达在线演示</span>
+    </div>
+  </div>
+
+  <section id="features">
+    <h2>它能做什么</h2>
+    <p class="sub">从一次提问到工单闭环，全部链路可观测。</p>
+    <div class="grid">
+      <div class="card"><div class="num">01</div><h3>多轮对话 · 云端持久化</h3><p>会话列表支持新建与切换，消息逐条写入云数据库，刷新页面不丢失，右侧实时展示处理链路。</p></div>
+      <div class="card"><div class="num">02</div><h3>FAQ 知识库检索</h3><p>对问题、关键词、分类做加权打分；高置信度命中时直接返回标准答案，避免大模型编造政策。</p></div>
+      <div class="card"><div class="num">03</div><h3>意图识别 + RAG 生成</h3><p>退款 / 查询订单 / 技术支持 / 通用四类，大模型 JSON 分类；未命中时注入 Top 3 FAQ 流式生成回复。</p></div>
+      <div class="card"><div class="num">04</div><h3>自动转人工</h3><p>用户主动要求、模型判定无法答复、或满意度 ≤ 2 星时自动创建工单并更新会话状态。</p></div>
+      <div class="card"><div class="num">05</div><h3>满意度评价</h3><p>1–5 星加文字评价写入云端，后台实时汇总平均分与分布。</p></div>
+      <div class="card"><div class="num">06</div><h3>管理后台</h3><p>5 个 KPI、满意度 / 意图 / 近 7 日趋势图、工单状态管理、对话记录全文展开与时间筛选。</p></div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <h2>一条消息的处理链路</h2>
+    <p class="sub">每一步都会实时显示在对话页右侧的「本轮分析」面板中。</p>
+    <div class="flow">
+      <div class="step"><b>1 · 输入与落库</b><small>写入 messages 表，拉取最近 10 条历史作为上下文</small></div>
+      <div class="step"><b>2 · 意图分类</b><small>大模型输出 JSON，失败则降级为本地关键词分类</small></div>
+      <div class="step"><b>3 · 知识库检索</b><small>加权打分，命中高分段直接返回标准答案</small></div>
+      <div class="step"><b>4 · 大模型回复</b><small>未命中时注入 Top 3 FAQ，流式生成并逐字上屏</small></div>
+      <div class="step"><b>5 · 兜底与评价</b><small>无法解决自动建工单；会话结束收集满意度</small></div>
+    </div>
+    <div class="tags">
+      <span class="tag">原生 HTML / CSS / JavaScript</span>
+      <span class="tag">WorkBuddy Cloud SDK</span>
+      <span class="tag">托管 PostgreSQL + RLS</span>
+      <span class="tag">免密钥大模型调用</span>
+      <span class="tag">流式输出 (SSE)</span>
+      <span class="tag">零构建步骤</span>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>关于这个 GitHub Pages 页面</h2>
+    <p class="sub">为什么演示站点不直接托管在这里。</p>
+    <div class="note">
+      <b>技术说明：</b>应用依赖云端数据库与大模型网关，服务端执行<b>精确 Origin 匹配</b>——公开密钥只在激活时预留的域名下生效。因此把源码原样放到 <code>*.github.io</code>、Vercel 或自定义域名下，页面能打开，但数据库与 AI 请求会被拒绝。<br><br>
+      本仓库的 <code>docs/</code> 是纯静态介绍页，不调用任何云服务；真正可交互的应用请通过上方「打开在线演示」访问。源码、数据表设计与接入说明见仓库根目录的 README.md。
+    </div>
+  </section>
+
+</div>
+
+<footer class="wrap">
+  <span>智能客服 Agent · MIT License</span>
+  <span>数据与大模型能力由 WorkBuddy Cloud 提供</span>
+</footer>
+
+</body>
+</html>
